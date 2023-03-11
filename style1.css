@@ -1,0 +1,270 @@
+/* Định dạng cho nút "Thêm thể loại sách" */
+a.add-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+a.add-button:hover {
+    background-color: #3e8e41;
+}
+
+/* Định dạng cho nút "Sửa" và "Xóa" */
+a.edit-button, a.delete-button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+a.edit-button:hover, a.delete-button:hover {
+    background-color: #3e8e41;
+}
+
+/* Định dạng cho bảng */
+table {
+    border-collapse: collapse;
+    width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Định dạng cho form tìm kiếm */
+form.search-form {
+    width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+}
+
+input[type=text], input[type=submit] {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+input[type=submit]:hover {
+    background-color: #3e8e41;
+}
+.button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #3e8e41;
+    
+  }
+  
+  .my-button-class {
+    background-color: #ff0000;
+    color: #fff;
+    border-radius: 7px;
+    width: 50px;
+    height: 30px;
+  }
+  .my-button-class1 {
+    background-color: #3e8e41;
+    color: #fff;
+    border-radius: 7px;
+    width: 50px;
+    height: 30px;
+  }
+  .detail{
+    background-color: #33def9;
+    padding-left: 10px;
+    margin-left: 5px;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    font-size: 10px;
+
+  }
+  form {
+    background-color: #f2f2f2;
+    border: 2px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 0 auto;
+    
+  }
+ 
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  input[type="text"], select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  input[type="submit"], input[type="reset"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #3e8e41;
+  }
+  body {
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    width: 780px;
+    margin: 0 auto;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+}
+
+input[type=text], input[type=submit] {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+a {
+    display: inline-block;
+    padding: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 780px;
+    margin: 0 auto;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+details
+{
+    background-color: aqua;
+
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+a.add-category {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+a.add-category:hover {
+  background-color: #3e8e41;
+}
+
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #3e8e41;
+}
+.form1{
+    display: inline-block; width: 60px;
+    margin-left: 30px;
+}
+.highlight{
+    color: red;
+}
+
+
+

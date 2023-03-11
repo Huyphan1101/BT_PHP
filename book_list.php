@@ -4,35 +4,40 @@
    if (!isset($_SESSION['book_array'])) {
      $_SESSION['book_array'] = array(
        array(
-         'category_code' => 'A001',
+         'category_code' => 'LS',
          'book_title' => 'Đắc nhân tâm',
          'author_name' => 'Dale Carnegie',
          'release_date' => '08-08-2016'
        ),
        array(
-         'category_code' => 'B002',
+         'category_code' => 'TT',
          'book_title' => 'Làm giàu không khó',
          'author_name' => 'Phạm Thanh Hưng',
          'release_date' => '20-02-2020'
        ),
        array(
-         'category_code' => 'C003',
+         'category_code' => 'VH',
          'book_title' => 'Sapiens: Lược sử loài người',
          'author_name' => 'Yuval Noah Harari',
          'release_date' => '10-02-2015'
        )
      );
    }
+  
    if(isset($_POST['add_book']))
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $selected_category_code = $_POST['category_book'];
+
     // Kiểm tra xem các trường dữ liệu đã được nhập đầy đủ hay chưa
     if (!empty($_POST['category_code']) && !empty($_POST['book_title']) && !empty($_POST['author_name']) && !empty($_POST['release_date'])) {
       // Thêm cuốn sách mới vào mảng session
+       $date = date_create($_POST['release_date']);
+  $release_date = date_format($date, 'd-m-Y');
       $new_book = array(
-        'category_code' => $_POST['category_code'],
+        'category_code' => $selected_category_code,
         'book_title' => $_POST['book_title'],
         'author_name' => $_POST['author_name'],
-        'release_date' => $_POST['release_date']
+        'release_date' => $release_date
       );
       
       $_SESSION['book_array'][] = $new_book;
@@ -44,6 +49,7 @@
        echo "Xin chào :"  .$_SESSION['fullname']; 
     }
   }
+  // load mã
   // Xóa
   if(isset($_POST['delete'])) {
     $index = $_POST['delete'];
@@ -56,23 +62,24 @@
 
 // Sửa thông tin
 if(isset($_POST['edit'])) {
-    $key = $_POST['key'];
-    $category = $_POST['category_code'];
-    $title = $_POST['book_title'];
-    $author = $_POST['author_name'];
-    $publish_date = $_POST['release_date'];
-  
-    $books = $_SESSION['book_array'];
-  
-    $books[$key] = array(
-      'category_code' => $category,
-      'book_title' => $title,
-      'author_name' => $author,
-      'release_date' => $publish_date
-    );
-  
-    $_SESSION['book_array'] = $books;
-  }
+  $key = $_POST['key'];
+  $category = $_POST['category_code'];
+  $title = $_POST['book_title'];
+  $author = $_POST['author_name'];
+  $publish_date = date('d-m-Y', strtotime($_POST['release_date']));
+
+  $books = $_SESSION['book_array'];
+
+  $books[$key] = array(
+    'category_code' => $category,
+    'book_title' => $title,
+    'author_name' => $author,
+    'release_date' => $publish_date
+  );
+
+  $_SESSION['book_array'] = $books;
+}
+
 
   // Tìm kiếm 
   if (isset($_POST['keyword'])) {
@@ -106,33 +113,30 @@ if(isset($_POST['edit'])) {
     }
 }
 if (isset($_POST['start_date']) && isset($_POST['end_date'])) {
-    $start_date = date_create($_POST['start_date']);
-    $end_date = date_create($_POST['end_date']);
-    $results = array();
-    foreach ($_SESSION['book_array'] as $key) {
-        $release_date = $key['release_date'];
-        if ($release_date >= $start_date && $release_date <= $end_date) {
-            $results[] = $key;
-        }
-    }
-    if (count($results) > 0) {
-        echo "<h3> Kết quả tìm kiếm: </h3>";
-        echo '<ul>';
-        foreach ($results as $key) {
-            echo '<li>';
-            echo 'Tên thể loại: ' . $key['category_code'] . '<br>';
-            echo '<li>';
-            echo 'Tên sách: ' . $key['book_title'] . '<br>';
-            echo '<li>';
-            echo 'Tên tác giả: ' . $key['author_name'] . '<br>';
-            echo '<li>';
-            echo 'Ngày phát hành: ' . $key['release_date'] . '<br>';
-            echo '</li>';
-        }
-        echo '</ul>';
-    } else {
-        echo "Không tìm thấy kết quả nào trong khoảng thời gian ";
-    }
+  $results = array_filter($_SESSION['book_array'], function($book) {
+      $release_date = date_create($book['release_date']);
+      $start_date = date_create($_POST['start_date']);
+      $end_date = date_create($_POST['end_date']);
+      return ($release_date >= $start_date && $release_date <= $end_date);
+  });
+  if (count($results) > 0) {
+      echo "<h3> Kết quả tìm kiếm: </h3>";
+      echo '<ul>';
+      foreach ($results as $book) {
+          echo '<li>';
+          echo 'Tên thể loại: ' . $book['category_code'] . '<br>';
+          echo '<li>';
+          echo 'Tên sách: ' . $book['book_title'] . '<br>';
+          echo '<li>';
+          echo 'Tên tác giả: ' . $book['author_name'] . '<br>';
+          echo '<li>';
+          echo 'Thời gian phát hành: ' . $book['release_date'] . '<br>';
+          echo '</li>';
+      }
+      echo '</ul>';
+  } else {
+      echo 'Không tìm thấy kết quả nào.';
+  }
 }
 
 
@@ -196,8 +200,17 @@ if(isset($_GET['key'])) {
 
 <form method="post">
   <input type="hidden" name="key" value="<?php echo $key; ?>">
-  <label>Mã thể loại:</label>
-  <input type="text" name="category_code" value="<?php echo $book['category_code']; ?>"><br><br>
+  <label for="category_code">Mã thể loại:</label>
+    <select name="category_code" id="category_code">
+        <?php foreach ($_SESSION['categories'] as $key) { ?>
+            <option value="<?php echo $key['code']; ?>"
+            <?php if (isset($book) && $book['category_code'] == $key['code']) {
+                echo 'selected';
+            } ?>>
+                <?php echo $key['code']; ?>
+            </option>
+        <?php } ?>
+    </select>
   <label>Tên sách:</label>
   <input type="text" name="book_title" value="<?php echo $book['book_title']; ?>"><br><br>
   <label>Tên tác giả:</label>
@@ -226,10 +239,17 @@ if(isset($_GET['key'])) {
 <div>
     <br>
 <form method="post" action="book_list.php">
-
-  <label>Mã thể loại:</label>
-  <input type="text" name="category_code" required><br>
-  
+<label for="category_code">Mã thể loại:</label>
+    <select name="category_code" id="category_code">
+        <?php foreach ($_SESSION['categories'] as $key) { ?>
+            <option value="<?php echo $key['code']; ?>"
+            <?php if (isset($book) && $book['category_code'] == $key['code']) {
+                echo 'selected';
+            } ?>>
+                <?php echo $key['code']; ?>
+            </option>
+        <?php } ?>
+    </select>
   <label>Tên sách:</label>
   <input type="text" name="book_title" required><br>
   

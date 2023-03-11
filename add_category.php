@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION['categories'])) {
     $_SESSION['categories'] = array(
         array('id' => 1, 'code' => 'TT', 'name' => 'Trinh thám', 'status' => 'hoạt động'),
-        array('id' => 2, 'code' => 'KN', 'name' => 'Khoa học tự nhiên', 'status' => 'hoạt động'),
-        array('id' => 3, 'code' => 'VH', 'name' => 'Văn học', 'status' => 'không hoạt động')
+        array('id' => 2, 'code' => 'LS', 'name' => 'Khoa học tự nhiên', 'status' => 'hoạt động'),
+        array('id' => 3, 'code' => 'HD', 'name' => 'Văn học', 'status' => 'không hoạt động')
     );
 }
 
@@ -58,7 +58,7 @@ if (isset($_POST['add_category'])) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet"  href="style.css">
+    <link rel="stylesheet"  href="style1.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>

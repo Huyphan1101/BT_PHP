@@ -30,7 +30,18 @@ if (isset($_POST['edit_category'])) {
     }
     if ($category) {
 ?>
-        <div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style1.css">
+
+    <title>Sửa thể loại </title>
+</head>
+<body>
+<div>
             <h2 style="text-align: center;">Cập nhật thể loại</h2>
             <form method="POST" action="update_category.php">
                 <div>
@@ -60,35 +71,16 @@ if (isset($_POST['edit_category'])) {
                 <br>
                 <input type="hidden" name="id" value="<?= $category['id'] ?>">
                 <input type="submit" value="Lưu" name="update_category" onclick="alert('Lưu thành công')">
+                
             </form>
+            <br>
         </div>
 <?php
     }
 }
 
 ?>
-<div>
-    <table border="1">
-        <tr>
-            <th>ID </th>
-            <th>Mã thể loại </th>
-            <th>Tên thể loại </th>
-            <th>Trạng thái </th>
-            <th>Hành động</th>
-        </tr>
-        <?php foreach ($_SESSION['categories'] as $key) { ?>
-            <tr>
-                <td><?= $key['id'] ?></td>
-                <td><?= $key['code'] ?></td>
-                <td><?= $key['name'] ?></td>
-                <td><?= $key['status'] ?></td>
-                <td>
-                    <form method="post" style="padding-top: 15px; padding-left: 3px;">
-                        <input type="hidden" name="id" value="<?= $key['id'] ?>">
-                        <button type="submit" name="edit_category" onclick="alert('bạn có chắc chắn muốn cập nhật')">Cập nhật</button>
-                    </form>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
-</div>
+    
+</body>
+</html>
+

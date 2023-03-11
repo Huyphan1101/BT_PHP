@@ -25,12 +25,21 @@ function displayCategories() {
             echo '<td>' . $category['code'] . '</td>';
             echo '<td>' . $category['name'] . '</td>';
             echo '<td>' . $category['status'] . '</td>';
-            echo '<td><a href="update_category.php?id=' . $category['id'] . '">Sửa</a> | <form method="post" style="display: inline;"><input type="hidden" name="category_id" value="' . $category['id'] . '">
-            <button type="submit" name="delete_category" onclick="return confirm(\'Bạn chắc chắn muốn xóa thể loại sách này?\')">Xóa</button></form></td>';
+            echo '<td>
+                <a href="update_category.php?id=' . $category['id'] . '" class="button">Sửa</a> 
+                <input type="hidden" name="category_id" value="' . $category['id'] . '">
+                <button class="my-button-class" type="submit" name="delete_category" onclick="return confirm(\'Bạn chắc chắn muốn xóa thể loại sách này?\')" class="button">Xóa</button>    
+                </td>';   
+            echo '<td>
+                <form class="form1" method="post" action="book_detail.php">
+                <input type="hidden" name="category_code" value="'. $category['code'].'">
+                <input type="hidden" name="category_name" value="'. $category['name'].'">
+                <button type="submit" name="view_detail" class="detail">Xem chi tiết</button>
+                </form>
+                </td>';
             echo '</tr>';
-        }
-    }
-}
+        }   }
+    }        
 //Tìm kiếm tên thể loại 
 if (isset($_POST['keyword'])) {
     $keyword = $_POST['keyword'];
@@ -68,69 +77,8 @@ if (isset($_POST['keyword'])) {
 <html>
 <head>
     <title>Quản lý thể loại sách</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <link rel="stylesheet" type="text/css" href="style1.css">
 
-        h1, h2 {
-            text-align: center;
-        }
-
-        form {
-            width: 780px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: inline-block;
-            width: 200px;
-        }
-
-        input[type=text], input[type=submit] {
-            padding: 5px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        input[type=submit] {
-            background-color: #4CAF50;
-            color: #fff;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        a {
-            display: inline-block;
-            padding: 5px;
-            background-color: #4CAF50;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-left: 10px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 780px;
-            margin: 0 auto;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
     <h1 style="text-align: center;">Quản lý thể loại sách</h1>
@@ -155,6 +103,7 @@ if (isset($_POST['keyword'])) {
             <th>Tên thể loại</th>
             <th>Trạng thái</th>
             <th>Tác vụ</th>
+            <th>Chi tiết</th>
         </tr>
         <?php displayCategories(); ?>
     </table>
